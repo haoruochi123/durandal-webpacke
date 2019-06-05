@@ -11,6 +11,7 @@ var GLOBALS = {
 };
 
 module.exports = {
+	devtool: 'source-map',
 	// Main entry directory and file
 	entry: {
 		app: [
@@ -24,7 +25,8 @@ module.exports = {
 		path: path.join(__dirname, 'dist'),
 		filename: '[name].js',
 		chunkFilename: '[name].chunk.js',
-		publicPath: '/durandal-webpack/dist/'
+		publicPath: '/durandal-webpack/dist/',
+		devtoolModuleFilenameTemplate: '../[resource-path]'
 	},
 
 	// Custom plugins
@@ -68,9 +70,20 @@ module.exports = {
 	devServer: {
 		contentBase: __dirname,
 		hot: false,
+		host: '0.0.0.0',
+		port: 3001,
 		inline: true,
 		historyApiFallback: true,
 		stats: { colors: true },
-		progress: true
+		progress: true,
+		disableHostCheck: true,
+		proxy: {
+            "/api": {
+			//   target: 'http://ccpms.iask.in/gateway/',
+			  target: 'http://localhost:8088/gateway/',
+              pathRewrite: {'^/api' : ''},
+              changeOrigin: true
+            }
+        },
 	}
 };
