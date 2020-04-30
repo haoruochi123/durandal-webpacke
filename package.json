@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "durandal": "^2.1.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "knockout": "^3.3.0"
   },
   "devDependencies": {
